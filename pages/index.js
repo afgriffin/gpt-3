@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <div className="root">
       <Head>
-        <title>GPT-3 Writer | buildspace</title>
+        <title>GPT-3 Writer</title>
       </Head>
       <div className="container">
         <div className="header">
@@ -43,6 +43,7 @@ const Home = () => {
           </div>
           <div className="header-subtitle">
             <h2>beat writer's block with our writing prompt generator</h2>
+            <h2>simply type a few topics separated by commas and let us do the rest</h2>
           </div>
         </div>
         <div className="prompt-container">
@@ -54,24 +55,24 @@ const Home = () => {
            />;
         </div>
         <div className="prompt-buttons">
-          <a className ="generate-button" onClick={callGenerateEndpoint}>
+          <a className ={isGenerating ? 'generate-button loading' : 'generate-button'} onClick={callGenerateEndpoint}>
             <div className="generate">
-              <p>Generate</p>
+              {isGenerating ? <span className="loader"></span> : <p>Generate</p>}
             </div>
           </a>
         </div>
-      </div>
-      <div className="badge-container grow">
-        <a
-          href="https://buildspace.so/builds/ai-writer"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className="badge">
-            <Image src={buildspaceLogo} alt="buildspace logo" />
-            <p>build with buildspace</p>
+        {apiOutput && (
+        <div className="output">
+          <div className="output-header-container">
+            <div className="output-header">
+              <h3>Output</h3>
+            </div>
           </div>
-        </a>
+          <div className="output-content">
+            <p>{apiOutput}</p>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );
